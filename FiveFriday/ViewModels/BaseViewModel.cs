@@ -11,6 +11,7 @@ namespace FiveFriday.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataStore<Driver> DriverDataStore => DependencyService.Get<IDataStore<Driver>>();
 
         bool isBusy = false;
         public bool IsBusy
