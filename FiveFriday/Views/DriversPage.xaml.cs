@@ -1,5 +1,4 @@
 ﻿using FiveFriday.ViewModels;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace FiveFriday.Views

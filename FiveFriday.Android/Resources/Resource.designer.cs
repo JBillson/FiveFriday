@@ -22107,10 +22107,10 @@ namespace FiveFriday.Droid
 			public const int icon_about = 2131165291;
 			
 			// aapt resource value: 0x7F07006C
-			public const int icon_feed = 2131165292;
+			public const int icon_driving = 2131165292;
 			
 			// aapt resource value: 0x7F07006D
-			public const int icon_search = 2131165293;
+			public const int icon_feed = 2131165293;
 			
 			// aapt resource value: 0x7F070064
 			public const int ic_arrow_down_24dp = 2131165284;

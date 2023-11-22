@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Newtonsoft.Json;
 
@@ -18,19 +17,13 @@ namespace FiveFriday.Models
 
         [JsonProperty("traces")] public List<Trace> Traces { get; set; }
 
-        public string FullName
-        {
-            get => Forename + " " + Surname;
-            set
-            {
-                if (value == null) throw new ArgumentNullException(nameof(value));
-            }
-        }
+        public string FullName => Forename + " " + Surname;
 
         public int TimeSpentOnActivities
         {
             get
             {
+                // In an actual application these dates would obviously come from a date range picker of some kind
                 var startDate = DateTime.Parse("2021/02/01");
                 var endDate = DateTime.Parse("2021/02/07");
 
