@@ -13,7 +13,6 @@ namespace FiveFriday
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
             DependencyService.Register<DriverMockDataStore>();
             MainPage = new AppShell();
         }

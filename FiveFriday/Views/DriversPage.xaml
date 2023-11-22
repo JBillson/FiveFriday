@@ -3,47 +3,49 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:FiveFriday.ViewModels;assembly=FiveFriday"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:models="clr-namespace:FiveFriday.Models;assembly=FiveFriday"
              x:Class="FiveFriday.Views.DriversPage"
-             Title="{Binding Title}"
-             x:Name="BrowseDriversPage">
+             x:DataType="viewModels:DriversViewModel"
+             Title="{Binding Title}">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Search" Command="{Binding FilterDriverCommand}" />
-    </ContentPage.ToolbarItems>
-
-
-    <RefreshView x:DataType="viewModels:DriversViewModel" Command="{Binding LoadDriversCommand}"
+    <RefreshView Command="{Binding LoadDriversCommand}"
                  IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <StackLayout>
-            <SearchBar Placeholder="Search Drivers" TextChanged="InputView_OnTextChanged"/>
-
-            <CollectionView x:Name="DriversListView"
-                            ItemsSource="{Binding Drivers}"
+            <SearchBar Placeholder="Search Drivers"
+                       SearchCommand="{Binding SearchDriversCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference InputView}}"
+                       x:Name="InputView">
+                <SearchBar.Behaviors>
+                    <xct:EventToCommandBehavior EventName="TextChanged"
+                                                Command="{Binding SearchDriversCommand}"
+                                                CommandParameter="{Binding Text, Source={x:Reference InputView}}" />
+                </SearchBar.Behaviors>
+            </SearchBar>
+            <CollectionView ItemsSource="{Binding Drivers}"
                             SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout x:DataType="models:Driver"
-                                     Padding="10">
+                        <StackLayout Padding="10"
+                                     x:DataType="models:Driver">
                             <FlexLayout>
-                                <Label Text="{Binding Forename}"
-                                       LineBreakMode="NoWrap"
-                                       FontSize="16">
-                                </Label>
-                                <Label Text=" ">
-
-                                </Label>
-                                <Label Text="{Binding Surname}"
+                                <Label Text="{Binding FullName}"
                                        LineBreakMode="NoWrap"
                                        FontSize="16">
                                 </Label>
                             </FlexLayout>
                             <FlexLayout>
-                                <Label Text="{Binding VehicleRegistration}"
+                                <Label Text="{Binding VehicleRegistration, StringFormat='Registration: {0}'}"
                                        LineBreakMode="NoWrap"
                                        FontSize="13">
                                 </Label>
-
+                            </FlexLayout>
+                            <FlexLayout x:Class="viewModels:DriversViewModel"
+                                        x:DataType="models:Driver">
+                                <Label Text="{Binding TimeSpentOnActivities, StringFormat='Time Spent on Activities: {0} Minutes'}"
+                                       LineBreakMode="NoWrap"
+                                       FontSize="13">
+                                </Label>
                             </FlexLayout>
                         </StackLayout>
                     </DataTemplate>
