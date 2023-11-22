@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace FiveFriday.Utilities
 {
     public class FileReader
     {
-        public static string ReadFile(string fileName)
+        public static async Task<string> ReadFileAsync(string fileName)
         {
             try
             {
@@ -14,7 +15,7 @@ namespace FiveFriday.Utilities
 
                 using (var reader = new System.IO.StreamReader(stream))
                 {
-                    return reader.ReadToEnd();
+                    return await reader.ReadToEndAsync();
                 }
             }
             catch (Exception e)

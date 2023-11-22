@@ -14,8 +14,9 @@ namespace FiveFriday
             MainPage = new AppShell();
         }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
+            await DriverMockDataStore.InitAsync();
         }
 
         protected override void OnSleep()

@@ -8,11 +8,11 @@ namespace FiveFriday.Services
 {
     public class DriverMockDataStore : IDataStore<Driver>
     {
-        private readonly List<Driver> _drivers;
+        private static List<Driver> _drivers;
 
-        public DriverMockDataStore()
+        public static async Task InitAsync()
         {
-            var input = Utilities.FileReader.ReadFile("Data.drivers.json");
+            var input = await Utilities.FileReader.ReadFileAsync("Data.drivers.json");
             var data = JsonConvert.DeserializeObject<Data>(input);
             _drivers = data.Drivers;
         }
@@ -25,7 +25,7 @@ namespace FiveFriday.Services
             var driver = _drivers.FirstOrDefault(x => x.DriverId == int.Parse(id));
             if (driver == null)
                 return await Task.FromResult(false);
-            
+
             _drivers.Remove(driver);
             return await Task.FromResult(true);
         }
