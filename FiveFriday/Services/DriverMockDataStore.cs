@@ -1,24 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FiveFriday.Models;
+using Newtonsoft.Json;
 
 namespace FiveFriday.Services
 {
-    public class DriverMockDataStore : IDataStore<DriverMockDataStore>
+    public class DriverMockDataStore : IDataStore<Driver>
     {
         private readonly List<Driver> _drivers;
 
         public DriverMockDataStore()
         {
-            // read from json file
+            var input = Utilities.FileReader.ReadFile("Data.drivers.json");
+            var data = JsonConvert.DeserializeObject<Data>(input);
+            _drivers = data.Drivers;
         }
         
-        public Task<bool> AddItemAsync(DriverMockDataStore item)
+        public Task<bool> AddItemAsync(Driver driver)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> UpdateItemAsync(DriverMockDataStore item)
+        public Task<bool> UpdateItemAsync(Driver driver)
         {
             throw new System.NotImplementedException();
         }
@@ -28,14 +32,14 @@ namespace FiveFriday.Services
             throw new System.NotImplementedException();
         }
 
-        public Task<DriverMockDataStore> GetItemAsync(string id)
+        public async Task<Driver> GetItemAsync(string id)
         {
-            throw new System.NotImplementedException();
+            return await Task.FromResult(_drivers.FirstOrDefault(x=> x.DriverId == int.Parse(id)));
         }
 
-        public Task<IEnumerable<DriverMockDataStore>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Driver>> GetItemsAsync(bool forceRefresh = false)
         {
-            throw new System.NotImplementedException();
+            return await Task.FromResult(_drivers);
         }
     }
 }

@@ -11,4 +11,9 @@
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Data\drivers.json" />
+    <EmbeddedResource Include="Data\drivers.json" />
+  </ItemGroup>
 </Project>

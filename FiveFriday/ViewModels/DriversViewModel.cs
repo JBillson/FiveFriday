@@ -41,5 +41,10 @@ namespace FiveFriday.ViewModels
                 IsBusy = false;
             }
         }
+        
+        public void OnAppearing()
+        {
+            IsBusy = true;
+        }
     }
 }
