@@ -1,6 +1,6 @@
 # Five Friday Technical Assessment
 
-This is a simple Xamarin.Forms application to display a searchable list of Drivers.
+This is a simple Xamarin.Forms application to display a searchable list of Drivers, built as a Technical Assessment for the Interview Process at Five Friday.
 
 ## APK
 You can grab the signed APK from the Root project directory OR from the latest release.
